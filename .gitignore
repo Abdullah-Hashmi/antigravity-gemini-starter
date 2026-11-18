@@ -1,0 +1,19 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Agent Handoff & Transient Sessions
+.ai-handoff/
+*.log
+
+# Editor & Local State
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Node / Package artifacts (for downstream users)
+node_modules/
+dist/
+build/
+coverage/
