@@ -6,6 +6,11 @@ Thumbs.db
 .ai-handoff/
 *.log
 
+# Workspace Agent Secrets & Active Local Configs
+.agents/mcp_config.json
+.agents/local_*
+.agents/*.local.json
+
 # Editor & Local State
 .vscode/*
 !.vscode/settings.json

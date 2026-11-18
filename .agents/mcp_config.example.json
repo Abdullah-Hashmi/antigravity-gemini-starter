@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/mcp-config.json",
+  "mcpServers": {
+    "sample-stdio-tool": {
+      "command": "node",
+      "args": ["./scripts/mcp-server.js"],
+      "env": {
+        "DEBUG": "true"
+      }
+    },
+    "sample-remote-service": {
+      "url": "https://mcp.example.com/mcp"
+    }
+  }
+}

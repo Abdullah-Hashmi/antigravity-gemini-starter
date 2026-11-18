@@ -8,12 +8,14 @@ A universal, production-grade agentic baseline configuration for projects built 
 
 ```
 antigravity-gemini-starter/
-├── GEMINI.md                   # Core universal agentic baseline for Gemini models
-├── README.md                   # Architecture & customization documentation
-├── .gitignore                  # Clean exclusions (OS, agent handoffs, temp data)
+├── .agents/
+│   └── mcp_config.example.json   # Optional: Sample MCP configurations (stdio & remote HTTP)
+├── GEMINI.md                     # Core universal agentic baseline for Gemini models
+├── README.md                     # Architecture & customization documentation
+├── .gitignore                    # Clean exclusions (OS, agent secrets, temp data)
 └── [Optional Domain Folders]
-    ├── apps/mobile/GEMINI.md   # (Optional) Nested scoped rules for mobile
-    └── apps/api/GEMINI.md      # (Optional) Nested scoped rules for backend
+    ├── apps/mobile/GEMINI.md     # (Optional) Nested scoped rules for mobile
+    └── apps/api/GEMINI.md        # (Optional) Nested scoped rules for backend
 ```
 
 ### Why File Isolation Matters
