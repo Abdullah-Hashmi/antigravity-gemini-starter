@@ -22,7 +22,7 @@ antigravity-gemini-starter/
 
 1. **Deterministic Discovery:** Antigravity natively loads `GEMINI.md` and `AGENTS.md` by walking up the directory hierarchy from the current file to the repository root.
 2. **Zero Cross-Tool Pollution:** Claude Code exclusively looks for `CLAUDE.md`, and Cursor looks for `.cursorrules`. By dedicating Gemini-specific operating constraints to `GEMINI.md`, teams can collaborate across different AI agents without rule collisions, redundant token consumption, or conflicting prompt styles.
-3. **Budget Compliance:** Antigravity enforces a **24 KB** per-rule limit and an aggregate **20,000 token budget** for always-on rules. This starter baseline consumes ~4.5 KB (~1,100 tokens), preserving over 90% of your rules budget for downstream project context.
+3. **Budget Compliance:** Antigravity enforces a **24 KB** per-rule limit and an aggregate **20,000 token budget** for always-on rules. This starter baseline consumes ~6 KB on disk but only ~4.8 KB (~1,200 tokens) at runtime (the Section 5 comment template costs zero tokens), preserving over 90% of your rules budget for downstream project context.
 
 ---
 
@@ -47,16 +47,60 @@ cp /path/to/antigravity-gemini-starter/GEMINI.md ./GEMINI.md
 ```
 
 ### 2. Configure Your Domain Stack
-Open `GEMINI.md` and navigate to **Section 5: Domain-Specific Directives**. Uncomment the template and fill in your project's technology stack:
+Open `GEMINI.md` and navigate to **Section 5: Domain-Specific Directives**. Uncomment the template and fill in your project's technology stack. Here are examples for different domains:
+
+**Mobile:**
 ```markdown
 ### Active Stack: Mobile (React Native / Expo)
 - Architecture: Feature-first module structure, offline-first SQLite synchronization.
+- Language & Runtime: TypeScript 5.x / Node 22.
+- Frameworks: Expo 52, React Native 0.76.
 - State Management: Zustand + TanStack Query.
 - UI & Styling: NativeWind (Tailwind CSS).
 - Verification Commands:
   - Lint: npm run lint
   - Typecheck: npx tsc --noEmit
   - Test: npm test
+  - Build: npx expo export
+- Dev Server: (not applicable — uses Expo Go / device preview)
+- Breakpoints: (not applicable)
+```
+
+**Web:**
+```markdown
+### Active Stack: Web (Next.js)
+- Architecture: App Router with server components, feature-based module structure.
+- Language & Runtime: TypeScript 5.x / Node 22.
+- Frameworks: Next.js 15, React 19.
+- State Management: TanStack Query + Zustand.
+- UI & Styling: Tailwind CSS v4.
+- Verification Commands:
+  - Lint: npm run lint
+  - Typecheck: npx tsc --noEmit
+  - Test: npx vitest run
+  - Build: npm run build
+- Dev Server: npm run dev -- --port 3000
+- Breakpoints: 375, 768, 1024, 1440
+- Environment:
+  - Required Vars: DATABASE_URL, NEXTAUTH_SECRET
+  - Config File: .env.local
+```
+
+**Game:**
+```markdown
+### Active Stack: Game (Unity 2022 LTS)
+- Architecture: Component-based ECS, scene-per-level, ScriptableObject data layer.
+- Language & Runtime: C# 11 / .NET 6.
+- Frameworks: Unity 2022 LTS, Universal Render Pipeline.
+- State Management: ScriptableObject event channels + singleton service locators.
+- UI & Styling: UI Toolkit (USS) + in-engine theme.
+- Verification Commands:
+  - Lint: dotnet format
+  - Typecheck: (handled by Unity compiler)
+  - Test: Unity Test Runner (Edit Mode + Play Mode)
+  - Build: Unity -batchmode -buildTarget StandaloneLinux64 -executeMethod BuildScript.Build
+- Dev Server: (not applicable)
+- Breakpoints: (not applicable)
 ```
 
 ### 3. Multi-Package / Monorepo Scoping
@@ -79,7 +123,7 @@ Antigravity automatically inherits root rules and applies directory-specific rul
 - **Multi-Model Coexistence:** Strict scope isolation; cross-tool configuration files are respected and preserved.
 - **Planning Threshold:** Formal implementation plans required for changes touching >2 files, dependencies, database schemas, or authentication boundaries.
 - **Quality & Safety:** Strict typing, structured error boundaries, minimal external dependencies, and absolute prohibition of unprompted destructive shell commands.
-- **Verification Protocol:** Mandatory linting, TypeScript type-checking (`tsc --noEmit`), and DOM/visual verification before task completion.
+- **Verification Protocol:** Mandatory project-native linting and type-checking, with optional dev-server lifecycle and browser verification for UI-touching changes.
 
 ---
 
